@@ -101,25 +101,14 @@ exports.resetPassword = async (req, res) => {
     }
 }
 
-exports.imageUpload = async (req, res) => {
+exports.getProfileData = async (req, res) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         const id = decodedToken.id;
-        cloudinary.uploader.upload(req.file.path, async (error, result) => {
-            if (result) {
-                let image = result.secure_url;
-                const user = await User.findByIdAndUpdate(id, {
-                    image,
-                }, {
-                    new: true,
-                });
-
-                return successResMsg(res, 200, user);
-            }
-        });
-       
-    } catch (err) {
+        const user = await User.find({_id:id});
+        return successResMsg(res, 200, user);
+    }catch(err){
         return errorResMsg(res, 500, err);
     }
 }
@@ -141,14 +130,3 @@ exports.updateProfile = async (req, res) => {
     }
 }
 
-exports.getProfileData = async (req, res) => {
-    try {
-        const token = req.headers.authorization.split(" ")[1];
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        const id = decodedToken.id;
-        const user = await User.find({_id:id});
-        return successResMsg(res, 200, user);
-    }catch(err){
-        return errorResMsg(res, 500, err);
-    }
-}
