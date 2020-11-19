@@ -6,12 +6,16 @@ const messageSchema = new mongoose.Schema({
         type: String,
     },
     date: {
-        type: Date
+        type: Date,
+        default: Date.now()
     },
-    preachers: [{
+    preacher: {
         type: String,
-    }],
+    },
     image: {
+        type: String,
+    },
+    series: {
         type: String,
     },
     audio: {
@@ -23,11 +27,6 @@ const messageSchema = new mongoose.Schema({
     summary: {
         type: String,
     },
-    messageList: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Message"
-    }
-]
 });
 
 

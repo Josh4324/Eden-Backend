@@ -11,11 +11,9 @@ exports.signUpValidationRules = () => {
         body("lastName").notEmpty().isAlpha().trim().escape().withMessage("Please provide Your last name"),
         body("phoneNumber").notEmpty().isNumeric().trim().escape().withMessage("Please provide Your phone number"),
         body("email").notEmpty().isEmail().normalizeEmail().withMessage("Email is required"),
-        body("country").notEmpty().isAlpha().trim().escape().withMessage("Please provide the country"),
-        body("state").notEmpty().isAlpha().trim().escape().withMessage("Please provide the state"),
         body("password").notEmpty().isLength({
-            min: 5
-        }).withMessage("Password must have at least 5 characters"),
+            min: 8
+        }).withMessage("Password must have at least 8 characters"),
     ]
 }
 
@@ -26,6 +24,20 @@ exports.loginValidationRules = () => {
         body("password").notEmpty().withMessage("Password is Required")
     ]
 }
+
+exports.messageValidationRules = () => {
+    return [
+        
+        body("topic").notEmpty().withMessage("Topic is required"),
+        body("preacher").notEmpty().withMessage("Preachers is required"),
+        body("image").notEmpty().withMessage("Image is required"),
+        body("audio").notEmpty().withMessage("Audio is required"),
+        body("youtube").notEmpty().withMessage("Youtube is required"),
+        body("summary").notEmpty().withMessage("Summary is required")
+       
+    ]
+}
+
 
 
 exports.validate = (req, res, next) => {

@@ -11,6 +11,9 @@ require("dotenv").config();
 
 
 const userRoutes = require("./routes/user");
+const messageRoutes = require("./routes/message");
+const seriesRoutes = require("./routes/series");
+const instagramRoutes = require("./routes/instagram");
 
 
 // Port
@@ -59,6 +62,9 @@ app.use(hpp());
 
 //REGISTER ROUTES HERE
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/message", messageRoutes);
+app.use("/api/v1/series", seriesRoutes);
+app.use("/api/v1/instagram", instagramRoutes);
 
 
 app.get("/", (req, res) => {

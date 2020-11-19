@@ -6,8 +6,8 @@ const validation = require("../middleware/validation");
 
 
 
-router.post('/signup', validation.signUpValidationRules(), validation.validation,  userController.signUp);
-router.post('/login', validation.loginValidationRules(), validation.validation, userController.logIn);
+router.post('/signup', validation.signUpValidationRules(), validation.validate,  userController.signUp);
+router.post('/login', validation.loginValidationRules(), validation.validate, userController.logIn);
 router.post('/resetpassword', auth.authorization("user","admin"), userController.resetPassword);
 router.patch('/',  auth.authorization("user","admin"), userController.updateProfile)
 router.get('/', auth.authorization("user","admin"), userController.getProfileData);
